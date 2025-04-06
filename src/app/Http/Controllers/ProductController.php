@@ -49,9 +49,37 @@ class ProductController extends Controller
         return redirect('/products');
     }
 
-    public function productId()
-    {
+    public function show($productId){
+        $product = Product::findOrFail($productId);
         $seasons = Season::all();
-        return view('index', compact('products', 'seasons',));
+        return view('show', compact('product', 'seasons'));
+    }
+
+    public function update(Request $request)
+    {
+        $form = $request->all();
+        unset($form['_token']);
+        Product::find($request->id)->update($form);
+        return redirect('/products');
+    }
+
+    public function search(Request $request)
+{
+    $query = Product::query();
+
+    // 検索キーワードで絞り込み
+    if ($request->filled('search')) {
+        $query->where('name', 'like', '%' . $request->search . '%');
+    }
+
+    // 並び替え処理（オプション）
+    if ($request->filled('price-list')) {
+        $order = $request->get('price-list') == 'asc' ? 'asc' : 'desc';
+        $query->orderBy('price', $order);
+    }
+
+    $products = $query->paginate(10)->appends($request->all());
+
+    return view('/products', compact('products'));
     }
 }
