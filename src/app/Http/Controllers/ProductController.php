@@ -42,13 +42,6 @@ class ProductController extends Controller
         return view('index',compact('products'));
     }
 
-
-    public function destroy(Request $request)
-    {
-        Product::find($request->id)->delete();
-        return redirect('/products');
-    }
-
     public function show($productId){
         $product = Product::findOrFail($productId);
         $seasons = Season::all();
@@ -64,15 +57,13 @@ class ProductController extends Controller
     }
 
     public function search(Request $request)
-{
+    {
     $query = Product::query();
 
-    // 検索キーワードで絞り込み
     if ($request->filled('search')) {
         $query->where('name', 'like', '%' . $request->search . '%');
     }
 
-    // 並び替え処理（オプション）
     if ($request->filled('price-list')) {
         $order = $request->get('price-list') == 'asc' ? 'asc' : 'desc';
         $query->orderBy('price', $order);
@@ -80,6 +71,6 @@ class ProductController extends Controller
 
     $products = $query->paginate(10)->appends($request->all());
 
-    return view('/products', compact('products'));
+    return view('index', compact('products'));
     }
 }

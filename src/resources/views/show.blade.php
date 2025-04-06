@@ -32,7 +32,8 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <div type="text">{{ $product->name }} </div>
+                        <input type="text" value="{{ $product->name }}">
+                        </input>
                     </div>
                     <div class="form__error">
                         @error('name')
@@ -47,7 +48,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <div type="text">{{ number_format($product->price) }}</div>
+                        <input type="text" value="{{ number_format($product->price) }}"></input>
                     </div>
                     <div class="form__error">
                         @error('price')
@@ -81,7 +82,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--textarea">
-                        <div type="text">{{ $product->description }} </div>
+                        <input type="text" value="{{ $product->description }}"> </input>
                     </div>
                     <div class="form__error">
                         @error('description')
