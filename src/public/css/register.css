@@ -1,0 +1,21 @@
+/* ボタンを並べるコンテナをflexにする */
+.form__button {
+    display: flex;
+}
+
+/* ボタン順番を変更するためにorderを使用 */
+.form__button:nth-child(2) {
+    order: 1;
+    /* "戻る" ボタンを1番目に */
+}
+
+.form__button:nth-child(1) {
+    order: 2;
+    /* "登録" ボタンを2番目に */
+}
+
+.form__error {
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
+}

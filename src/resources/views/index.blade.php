@@ -11,7 +11,7 @@
         <h2>商品一覧</h2>
     </div>
     <div class="product-form__inner">
-        <form class="form" action="/products/register" method="get">
+        <form class="form" action="/products/register" method="get" enctype="multipart/form-data">
             <button class="header-nav__button">＋商品を追加</button>
         </form>
         <div class="product-form__group">
@@ -30,11 +30,14 @@
     <div class="form__product">
         @foreach($products as $product)
             <div class="product-item">
-                <h3>{{ $product->name }}</h3>
-                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="product-image">
-                        <p>¥{{ number_format($product->price) }}</p>
+                    <img src="{{  $product->image }}" class="small-img">
+                    
+                    <div>{{ $product->name }} ¥{{ number_format($product->price) }}</div>
             </div>
         @endforeach
+
+        <div> {{ $products->links('pagination::bootstrap-4') }}
+        </div>
     </div>
 </div>
 @endsection
