@@ -17,7 +17,7 @@
             </form>
             <form class="form" action="/products/search" method="get">
                 <div class="product-form__group">
-                    <input type="text" name="search" placeholder="商品名で検索">
+                    <input type="text" name="keyword" placeholder="商品名で検索">
                 </div>
                     <input type="submit" name="search-button" value="検索">
             <div class="product-form__group">
