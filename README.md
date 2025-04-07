@@ -18,13 +18,15 @@ Laravel環境構築
     1.docker-compose exec php bash
     2.composer install
     3.env.exampleファイルから.evnを作成し、環境変数を変更
-    　cp .env.example .env
+    cp .env.example .env
     4.php artisan key:generate
     5.php artisan migrate
     6.php artisan db:seed
     "The stream or file could not be opened"エラーが発生した場合
     srcディレクトリにあるstorageディレクトリ以下の権限を変更
     $ chmod -R 777 storage
+    7.シンボリックリンクの作成
+    php artisan storage:link
 
 ```
 

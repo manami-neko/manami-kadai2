@@ -26,18 +26,18 @@ class ProductController extends Controller
 
     public function store(RegisterRequest $request)
     {
-        $product = Product::create(
-            $request->only(
+        $data = $request->only(
             [
                 'name',
                 'price',
                 'season_ids',
                 'description',
                 'image',
-            ])
+            ]
         );
+        $data['image'] = 'storage/' . $request->image->store('images', 'public');
+        $product = Product::create($data);
         $product->seasons()->sync($request->season_ids);
-        $product['image'] = $request->image->store('images', 'public');
         $products = Product::paginate(6);
         return view('index',compact('products'));
     }

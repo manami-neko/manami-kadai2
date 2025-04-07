@@ -15,7 +15,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <img src="{{  $product->image }}">
+                        <img src="{{  asset($product->image) }}">
                     </div>
                         <input type="file" name="image" value="{{ old('image') }}">
                     </div>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="text" value="{{ $product->name }}">
+                        <input type="text" name="name" value="{{ $product->name }}">
                         </input>
                     </div>
                     <div class="form__error">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="text" value="{{ number_format($product->price) }}"></input>
+                        <input type="text" name="price" value="{{ number_format($product->price) }}"></input>
                     </div>
                     <div class="form__error">
                         @error('price')
@@ -82,7 +82,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--textarea">
-                        <input type="text" value="{{ $product->description }}"> </input>
+                        <input type="text" name="description" value="{{ $product->description }}"> </input>
                     </div>
                     <div class="form__error">
                         @error('description')
@@ -93,6 +93,7 @@
             </div>
             
             <div class="form__button">
+                <input type="hidden" name="id" value="{{ $product->id }}">
                 <button class="form__button-submit" type="submit">変更を保存</button>
             </div>
         </form>
