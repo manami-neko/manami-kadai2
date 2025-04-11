@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="register-form__inner">
-        <form class="form" action="/products" method="post" enctype="multipart/form-data">
+        <form class="form" action="/edit" method="post" enctype="multipart/form-data">
         @csrf
             <div class="register-form__group">
                 <div class="form__group-title">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="text" name="price" value="{{ number_format($product->price) }}"></input>
+                        <input type="number" name="price" value="{{ $product->price }}"></input>
                     </div>
                     <div class="form__error">
                         @error('price')
@@ -65,7 +65,7 @@
                     <div class="form__input--text">
                         @foreach ($seasons as $season)
                         <label>
-                            <input type="checkbox" name="season_ids[]" value="{{ $product->name }}">{{ $season->name }}
+                            <input type="checkbox" name="season_ids[]" value="{{ $season->id }}">{{ $season->name }}
                         </label>
                         @endforeach
                     </div>

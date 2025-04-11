@@ -52,7 +52,10 @@ class ProductController extends Controller
     {
         $form = $request->all();
         unset($form['_token']);
-        Product::find($request->id)->update($form);
+        $form['image'] = 'storage/' . $request->image->store('images', 'public');
+        $product = Product::find($request->id);
+        $product->update($form);
+        $product->seasons()->sync($request->season_ids);
         return redirect('/products');
     }
 

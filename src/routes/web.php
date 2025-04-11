@@ -21,4 +21,4 @@ Route::get('/products/search', [ProductController::class, 'search']);
 Route::get('/products/{productId}', [ProductController::class, 'show']);
 
 
-Route::post('/edit', [AuthorController::class, 'update']);
+Route::post('/edit', [ProductController::class, 'update']);
