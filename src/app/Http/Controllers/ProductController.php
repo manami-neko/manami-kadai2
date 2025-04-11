@@ -58,9 +58,10 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
+        // dd($request->all());
     $query = Product::query();
-    if ($request->filled('search')) {
-        $query->where('name', 'like', '%' . $request->search . '%');
+    if ($request->filled('keyword')) {
+        $query->where('name', 'like', '%' . $request->keyword . '%');
     }
     if ($request->filled('price-list')) {
         $order = $request->get('price-list') == 'asc' ? 'asc' : 'desc';
