@@ -39,10 +39,11 @@ class ProductController extends Controller
         $product = Product::create($data);
         $product->seasons()->sync($request->season_ids);
         $products = Product::paginate(6);
-        return view('index',compact('products'));
+        return view('index', compact('products'));
     }
 
-    public function show($productId){
+    public function show($productId)
+    {
         $product = Product::findOrFail($productId);
         $seasons = Season::all();
         return view('show', compact('product', 'seasons'));
@@ -62,15 +63,20 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         // dd($request->all());
-    $query = Product::query();
-    if ($request->filled('keyword')) {
-        $query->where('name', 'like', '%' . $request->keyword . '%');
+        $query = Product::query();
+        if ($request->filled('keyword')) {
+            $query->where('name', 'like', '%' . $request->keyword . '%');
+        }
+        if ($request->filled('price-list')) {
+            $order = $request->get('price-list') == 'asc' ? 'asc' : 'desc';
+            $query->orderBy('price', $order);
+        }
+        $products = $query->paginate(10)->appends($request->all());
+        return view('index', compact('products'));
     }
-    if ($request->filled('price-list')) {
-        $order = $request->get('price-list') == 'asc' ? 'asc' : 'desc';
-        $query->orderBy('price', $order);
-    }
-    $products = $query->paginate(10)->appends($request->all());
-    return view('index', compact('products'));
+
+    public function login(Request $request)
+    {
+        return view('login');
     }
 }

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +16,16 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/register', [ProductController::class, 'register']);
-Route::post('/products', [ProductController::class, 'store']);
-Route::get('/products/search', [ProductController::class, 'search']);
-Route::get('/products/{productId}', [ProductController::class, 'show']);
 
 
-Route::post('/edit', [ProductController::class, 'update']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/products/register', [ProductController::class, 'register']);
+    Route::post('/products', [ProductController::class, 'store']);
+    Route::get('/products/search', [ProductController::class, 'search']);
+    Route::get('/products/{productId}', [ProductController::class, 'show']);
+    Route::post('/edit', [ProductController::class, 'update']);
+    Route::get('/profile', [ProfileController::class, 'profile']);
+    Route::post('/profile', [ProfileController::class, 'store']);
+});
